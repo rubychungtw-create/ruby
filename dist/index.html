@@ -45,7 +45,7 @@
         <article class="hud-card"><div class="kicker">今日完成</div><div class="big" id="completionValue">0/4</div><div class="small" id="todayXp">今日 0 XP</div></article>
       </div>
       <article class="boss" id="bossCard"><div class="boss-icon">B</div><div><div class="kicker">下一場 BOSS</div><div class="boss-title" id="bossTitle"></div><div class="boss-scope" id="bossScope"></div></div><div class="countdown" id="bossCountdown"></div></article>
-      <div class="quest-head"><div><div class="kicker">TODAY'S QUESTS</div><h2 id="questTitle">今日關卡</h2></div><div class="quest-actions"><div class="daily-progress" id="dailyProgress">0%</div><button class="add-quest-btn" id="openQuestDialog" type="button">＋ 新增關卡</button></div></div>
+      <div class="quest-head"><div><div class="kicker">TODAY'S QUESTS</div><h2 id="questTitle">今日關卡</h2><div class="drag-help">拖曳任務卡到其他區域，即可更改分類</div></div><div class="quest-actions"><div class="daily-progress" id="dailyProgress">0%</div><button class="add-quest-btn" id="openQuestDialog" type="button">＋ 新增關卡</button></div></div>
       <div class="matrix" id="questMatrix"></div>
     </section>
 
@@ -68,13 +68,14 @@
       <h2 id="questDialogTitle">建立自訂關卡</h2>
       <div class="dialog-date" id="customQuestDate"></div>
       <form class="quest-form" id="customQuestForm">
+        <input name="editId" type="hidden">
         <label class="field"><span>科目</span><input name="subject" maxlength="20" placeholder="例如：化學" required></label>
         <label class="field"><span>開始時間</span><input name="time" type="time" value="19:00" required></label>
         <label class="field wide"><span>關卡名稱</span><input name="name" maxlength="50" placeholder="例如：氧化還原錯題重刷" required></label>
         <label class="field wide"><span>通關條件</span><input name="clear" maxlength="80" placeholder="例如：完成 5 題並寫出錯因" required></label>
-        <label class="field"><span>獎勵 XP</span><select name="xp"><option value="20">20 XP</option><option value="30" selected>30 XP</option><option value="40">40 XP</option><option value="50">50 XP</option></select></label>
+        <label class="field"><span>獎勵 XP</span><input name="xp" type="number" min="0" max="200" step="5" value="30" required></label>
         <label class="field"><span>任務分類</span><select name="quadrant"><option value="urgent_important">緊急且重要</option><option value="important_not_urgent" selected>重要不緊急</option><option value="urgent_not_important">緊急不重要</option><option value="not_urgent_not_important">不緊急不重要</option></select></label>
-        <div class="dialog-actions"><button class="cancel-btn" id="cancelQuestDialog" type="button">取消</button><button class="save-btn" type="submit">加入今日任務</button></div>
+        <div class="dialog-actions"><button class="cancel-btn" id="cancelQuestDialog" type="button">取消</button><button class="save-btn" id="questSubmitButton" type="submit">加入今日任務</button></div>
       </form>
     </div>
   </dialog>
