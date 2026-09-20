@@ -45,6 +45,23 @@
         <article class="hud-card"><div class="kicker">今日完成</div><div class="big" id="completionValue">0/4</div><div class="small" id="todayXp">今日 0 XP</div></article>
       </div>
       <article class="boss" id="bossCard"><div class="boss-icon">B</div><div><div class="kicker">下一場 BOSS</div><div class="boss-title" id="bossTitle"></div><div class="boss-scope" id="bossScope"></div></div><div class="countdown" id="bossCountdown"></div></article>
+      <section class="mission-timer" id="missionTimer" aria-labelledby="timerPhase">
+        <div class="timer-copy">
+          <div class="kicker">MISSION BOMB</div>
+          <h2 id="timerPhase">任務倒數</h2>
+          <p id="timerHint">45 分鐘專注，撐到拆彈成功！</p>
+          <div class="timer-rules"><span>專注 45 分</span><span>短休 10 分</span><span>第 4 組長休 30 分</span></div>
+        </div>
+        <div class="bomb-clock" id="bombClock" aria-label="任務倒數 45 分鐘">
+          <div class="bomb-fuse" aria-hidden="true"><span></span></div>
+          <div class="bomb-face"><span class="bomb-icon" aria-hidden="true">💣</span><time id="timerDisplay">45:00</time></div>
+        </div>
+        <div class="timer-control-area">
+          <div class="timer-rounds" id="timerRounds" aria-label="四輪專注進度"></div>
+          <div class="timer-actions"><button class="timer-main-btn" id="timerStartPause" type="button">▶ 開始任務</button><button class="timer-reset-btn" id="timerReset" type="button">↻ 重設</button></div>
+          <div class="timer-save-note">登入後自動儲存・換裝置也能接著倒數</div>
+        </div>
+      </section>
       <div class="quest-head"><div><div class="kicker">TODAY'S QUESTS</div><h2 id="questTitle">今日關卡</h2><div class="drag-help">拖曳任務卡到其他區域，即可更改分類</div></div><div class="quest-actions"><div class="daily-progress" id="dailyProgress">0%</div><button class="add-quest-btn" id="openQuestDialog" type="button">＋ 新增關卡</button></div></div>
       <div class="matrix" id="questMatrix"></div>
     </section>
