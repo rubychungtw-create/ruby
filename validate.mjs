@@ -1,9 +1,8 @@
 import fs from "node:fs";
 const html = fs.readFileSync("dist/index.html", "utf8");
-const match = html.match(/<script>([\s\S]*?)<\/script>/);
-if (!match) throw new Error("missing script");
-new Function(match[1]);
-if (!html.includes('id="questList"') || !html.includes("pink-study-quest-v1")) {
+const script = fs.readFileSync("dist/app.js", "utf8");
+new Function(script);
+if (!html.includes('id="questMatrix"') || !html.includes('id="googleSignIn"') || !html.includes('id="settingsDialog"')) {
   throw new Error("missing core UI");
 }
-console.log(JSON.stringify({ htmlBytes: Buffer.byteLength(html), scriptSyntax: "ok", coreUi: "ok" }));
+console.log(JSON.stringify({ htmlBytes: Buffer.byteLength(html), scriptBytes: Buffer.byteLength(script), scriptSyntax: "ok", coreUi: "ok" }));

@@ -27,11 +27,13 @@
     @media(max-width:760px){.app{padding:17px 14px 100px}.topbar{align-items:stretch;flex-direction:column}.brand{align-items:flex-start}.brand h1{font-size:1.18rem}.subtitle{display:none}.date-nav{align-self:flex-end}.hud{grid-template-columns:1fr 1fr}.hud-card.primary{grid-column:1/-1}.hud-card{min-height:98px;padding:14px}.quest-head{align-items:flex-start}.quest-actions{align-items:flex-end;flex-direction:column}.quests{grid-template-columns:1fr}.boss{grid-template-columns:auto 1fr}.countdown{grid-column:1/-1}.schedule-day{grid-template-columns:78px 1fr}.schedule-day .day-count{grid-column:2}.stats-grid{grid-template-columns:1fr}.quest-form{grid-template-columns:1fr}.field.wide,.dialog-actions{grid-column:1}.nav-btn{padding:10px 13px}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
   </style>
+  <link rel="stylesheet" href="cloud.css" />
 </head>
-<body>
+<body data-theme="pink">
   <main class="app">
     <header class="topbar">
-      <div class="brand"><div class="mark">⚡</div><div><h1>with great power comes great responsibility</h1><div class="subtitle">高二直升自然組・愛班任務線</div></div></div>
+      <div class="brand"><div class="mark">⚡</div><div><h1 id="heroHeadline">with great power comes great responsibility</h1><div class="subtitle">高二直升自然組・雲端任務線</div></div></div>
+      <div class="top-actions"><div><button class="account-btn" id="accountButton" type="button"><span id="accountAvatar"><span class="avatar">P</span></span><span class="account-name" id="accountName">玩家</span></button><div class="cloud-state" id="cloudState">已同步</div></div></div>
       <div class="date-nav"><button class="icon-btn" id="prevDay" aria-label="前一天">‹</button><button class="date-label" id="dateLabel"></button><button class="icon-btn" id="nextDay" aria-label="後一天">›</button></div>
     </header>
 
@@ -44,7 +46,7 @@
       </div>
       <article class="boss" id="bossCard"><div class="boss-icon">B</div><div><div class="kicker">下一場 BOSS</div><div class="boss-title" id="bossTitle"></div><div class="boss-scope" id="bossScope"></div></div><div class="countdown" id="bossCountdown"></div></article>
       <div class="quest-head"><div><div class="kicker">TODAY'S QUESTS</div><h2 id="questTitle">今日關卡</h2></div><div class="quest-actions"><div class="daily-progress" id="dailyProgress">0%</div><button class="add-quest-btn" id="openQuestDialog" type="button">＋ 新增關卡</button></div></div>
-      <div class="quests" id="questList"></div>
+      <div class="matrix" id="questMatrix"></div>
     </section>
 
     <section class="panel" id="schedulePanel">
@@ -71,13 +73,35 @@
         <label class="field wide"><span>關卡名稱</span><input name="name" maxlength="50" placeholder="例如：氧化還原錯題重刷" required></label>
         <label class="field wide"><span>通關條件</span><input name="clear" maxlength="80" placeholder="例如：完成 5 題並寫出錯因" required></label>
         <label class="field"><span>獎勵 XP</span><select name="xp"><option value="20">20 XP</option><option value="30" selected>30 XP</option><option value="40">40 XP</option><option value="50">50 XP</option></select></label>
+        <label class="field"><span>任務分類</span><select name="quadrant"><option value="urgent_important">緊急且重要</option><option value="important_not_urgent" selected>重要不緊急</option><option value="urgent_not_important">緊急不重要</option><option value="not_urgent_not_important">不緊急不重要</option></select></label>
         <div class="dialog-actions"><button class="cancel-btn" id="cancelQuestDialog" type="button">取消</button><button class="save-btn" type="submit">加入今日任務</button></div>
       </form>
     </div>
   </dialog>
+  <dialog id="settingsDialog" aria-labelledby="settingsTitle">
+    <div class="dialog-body">
+      <h2 id="settingsTitle">玩家設定</h2>
+      <div class="account-info"><span id="settingsAvatar"><span class="avatar">P</span></span><div><b id="settingsName">玩家</b><div class="account-email" id="settingsEmail"></div></div></div>
+      <form class="settings-form" id="settingsForm">
+        <label class="field"><span>我的大標題</span><input id="headlineInput" name="headline" maxlength="80" required></label>
+        <div class="field"><span>主題色</span><div class="theme-grid">
+          <label class="theme-choice"><input type="radio" name="theme" value="pink"><span>🌸 粉色可愛</span></label>
+          <label class="theme-choice"><input type="radio" name="theme" value="sky"><span>☁️ 藍色天空</span></label>
+          <label class="theme-choice"><input type="radio" name="theme" value="purple"><span>🔮 紫色星空</span></label>
+          <label class="theme-choice"><input type="radio" name="theme" value="sunset"><span>🌅 黃橘日落</span></label>
+        </div></div>
+        <div class="dialog-actions"><button class="cancel-btn" id="closeSettings" type="button">取消</button><button class="save-btn" type="submit">儲存設定</button></div>
+      </form>
+      <div class="danger-row"><button class="secondary-btn" id="switchAccountButton" type="button">切換 Google 帳號</button><button class="signout-btn" id="signOutButton" type="button">登出</button></div>
+    </div>
+  </dialog>
+  <section class="auth-screen" id="authScreen" aria-label="登入">
+    <div class="login-card"><div class="login-mark">⚡</div><h1>Study Quest</h1><p>登入自己的冒險存檔。你的任務、XP、標題與主題會在不同裝置保持同步。</p><button class="google-btn" id="googleSignIn" type="button"><span class="google-icon">G</span> 使用 Google 帳號登入</button><div class="auth-error" id="authError"></div><div class="privacy-note">每位玩家只能查看與修改自己的資料。</div></div>
+  </section>
+  <div class="loading-mask hidden" id="loadingMask"><div><div class="spinner"></div>正在載入你的冒險存檔…</div></div>
   <nav class="bottom-nav" aria-label="主要頁面"><button class="nav-btn active" data-panel="todayPanel">今日</button><button class="nav-btn" data-panel="schedulePanel">行程</button><button class="nav-btn" data-panel="statsPanel">戰績</button></nav>
   <div class="celebrate" id="celebrate"></div><div class="toast" id="toast" role="status"></div>
-  <script>
+  <script type="text/plain" id="legacyScript">
     const DAY=86400000, start=new Date('2026-09-12T00:00:00'), end=new Date('2027-01-20T00:00:00');
     const tests=[
       ['2026-09-14','國文','第四冊 L1–2、補充教材 L1、成語 P311–325'],['2026-09-15','地理','B2 Ch7'],['2026-09-16','英文','B4 L2'],['2026-09-18','物理','選修物理 II：4-5、5-1～5-3'],['2026-09-21','國文','第四冊 L1–3、成語 P326–340'],['2026-09-22','公民','B2 L5'],['2026-09-24','數學','2-1～2-2'],['2026-09-29','作文','第一次作文段考'],['2026-09-30','英文聽力','第一次英聽段考'],['2026-10-01','數學','3-1～3-2'],['2026-10-05','全科','第一次段考（10/5～10/6）'],['2026-10-19','國文','第四冊 L1–6、成語 P341–355'],['2026-10-21','英文','B4 L4'],['2026-10-22','數學','4-2'],['2026-10-27','歷史','B3 Ch5～6-1'],['2026-10-29','數學','4-2'],['2026-10-30','化學','選修化學 III：1-1～1-2'],['2026-11-02','作文','作文週考'],['2026-11-03','地理','B3 Ch2'],['2026-11-04','英文','B4 L5'],['2026-11-05','地科','地質'],['2026-11-06','物理','選修物理 III：2-1～2-3'],['2026-11-09','國文','第四冊 L1–8、補充教材 L2、成語 P356–370'],['2026-11-10','公民','B3 Ch6'],['2026-11-11','生物','選修生物 III：Ch2-1～2-2'],['2026-11-12','數學','4-4'],['2026-11-13','化學','選修化學 III：1-3～1-4'],['2026-11-16','作文','第二次作文段考'],['2026-11-17','英文聽力','第二次英聽段考'],['2026-11-18','英文','B4 L6'],['2026-11-19','數學','1-1～1-2'],['2026-11-25','全科','第二次段考（11/25～11/26）'],['2026-12-09','英文','B4 L7'],['2026-12-10','數學','1-3'],['2026-12-14','作文','作文週考'],['2026-12-17','地科','大氣'],['2026-12-18','化學','選修化學 III：2-2～2-3'],['2026-12-21','國文','第四冊 L1～文化教材、成語 P371–385'],['2026-12-22','歷史','B2 Ch6'],['2026-12-24','數學','1-4'],['2026-12-29','地理','B3 Ch3'],['2026-12-30','英文／生物','英文 B4 L8；選修生物 III Ch4-1'],['2027-01-04','國文','第五冊 L1、L4；成語 P386–390'],['2027-01-05','公民','B3 L1'],['2027-01-07','數學','2-1'],['2027-01-08','全民國防','高二全民國防期末考'],['2027-01-13','英文聽力','高中英聽期末考'],['2027-01-14','數學','2-2'],['2027-01-18','全科','期末考（1/18～1/20）']
@@ -110,5 +134,7 @@
     function registerWebMCP(){const c=document.modelContext;if(!c?.registerTool)return;const status=q=>completed(q)?'completed':'pending';c.registerTool({name:'get_today_study_missions',title:'讀取今日任務',description:'取得目前選取日期的讀書任務與完成狀態。',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true,untrustedContentHint:false},execute:()=>({date:iso(selected),missions:missionsFor(selected).map(q=>({id:q.id,subject:q.subject,title:q.name,status:status(q),xp:q.xp}))})});c.registerTool({name:'complete_study_mission',title:'完成讀書任務',description:'將指定任務標記為完成並更新畫面與 XP。',inputSchema:{type:'object',properties:{missionId:{type:'string'}},required:['missionId'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute:({missionId})=>{const q=allMissions().find(x=>x.id===missionId);if(!q)throw new Error('找不到任務');state[q.id]=true;save();render();return{id:q.id,status:'completed',totalXp:totals().xp}}})}
     render();registerWebMCP();
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
