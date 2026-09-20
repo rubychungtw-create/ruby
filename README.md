@@ -1,4 +1,4 @@
-# Study Quest｜學習英雄
+# Study Quest｜粉紅學習英雄
 
 把高中讀書計畫做成闖關遊戲的個人化學習網站。從一張粉色週考任務表開始，逐步進化成支援多人帳號、雲端同步、任務分類、專注計時與學習回想的完整工具。
 
@@ -14,7 +14,9 @@
 - 每輪鎖定一個「本輪唯一目標」
 - 把突然想到的事情暫存在「分心停車場」
 - 寫下今日重點、心得，並上傳筆記照片
-- 用「專注、任務、回想、行程、戰績」五個分頁保持畫面清楚
+- 把每場週考當成 Boss 關卡，輸入成績後才能確認通關
+- 依科目查看成績折線圖與進步幅度
+- 用「專注、任務、週考、回想、行程、戰績」六個分頁保持畫面清楚
 
 ## 專案結構
 
@@ -29,6 +31,7 @@ supabase-schema-v2.sql   任務編輯資料庫升級
 supabase-schema-v3.sql   專注計時器資料庫升級
 supabase-schema-v4.sql   回想與筆記照片資料庫升級
 supabase-schema-v5.sql   唯一目標與分心停車場資料庫升級
+supabase-schema-v6.sql   週考成績與進步曲線資料庫升級
 validate.mjs             發布前基本驗證
 EVOLUTION.md             完整版本進化史
 ```
@@ -51,4 +54,11 @@ node validate.mjs
 ## 版本故事
 
 本專案保留從第一版到目前版本的真實 Git commit，而不是把完成品一次上傳。請見 [EVOLUTION.md](EVOLUTION.md) 查看每次進化的原因與成果。
+
+## Contributors
+
+- [@rubychungtw-create](https://github.com/rubychungtw-create) — 專案發起、學習需求與產品方向
+- **ChatGPT / OpenAI Codex** — 協作規劃、介面設計、程式實作、測試、部署與文件整理
+
+> Study Quest 是由使用者的真實學習需求出發，與 ChatGPT / OpenAI Codex 共同迭代完成的作品。
 
