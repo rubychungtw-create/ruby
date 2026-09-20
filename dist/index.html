@@ -38,12 +38,6 @@
     </header>
 
     <section class="panel active" id="focusPanel">
-      <div class="hud">
-        <article class="hud-card primary"><div class="kicker">目前稱號</div><div class="big" id="titleValue">新手冒險者</div><div class="small"><span id="xpValue">0</span> XP ・距離下一級 <span id="xpNeeded">500</span></div><div class="xp-track"><div class="xp-fill" id="xpFill"></div></div></article>
-        <article class="hud-card"><div class="kicker">等級</div><div class="big" id="levelValue">1</div><div class="small">每 500 XP 升級</div></article>
-        <article class="hud-card"><div class="kicker">連續通關</div><div class="big"><span id="streakValue">0</span> 天</div><div class="small">全關完成才延續</div></article>
-        <article class="hud-card"><div class="kicker">今日完成</div><div class="big" id="completionValue">0/4</div><div class="small" id="todayXp">今日 0 XP</div></article>
-      </div>
       <article class="boss" id="bossCard"><div class="boss-icon">B</div><div><div class="kicker">下一場 BOSS</div><div class="boss-title" id="bossTitle"></div><div class="boss-scope" id="bossScope"></div></div><div class="countdown" id="bossCountdown"></div></article>
       <div class="focus-tools">
         <section class="focus-widget single-goal-card" aria-labelledby="focusGoalTitle">
@@ -107,6 +101,12 @@
 
     <section class="panel" id="statsPanel">
       <div class="quest-head"><div><div class="kicker">PLAYER RECORD</div><h2>冒險紀錄</h2></div></div>
+      <div class="hud">
+        <article class="hud-card primary"><div class="kicker">目前稱號</div><div class="big" id="titleValue">新手冒險者</div><div class="small"><span id="xpValue">0</span> XP ・距離下一級 <span id="xpNeeded">500</span></div><div class="xp-track"><div class="xp-fill" id="xpFill"></div></div></article>
+        <article class="hud-card"><div class="kicker">等級</div><div class="big" id="levelValue">1</div><div class="small">每 500 XP 升級</div></article>
+        <article class="hud-card"><div class="kicker">連續通關</div><div class="big"><span id="streakValue">0</span> 天</div><div class="small">全關完成才延續</div></article>
+        <article class="hud-card"><div class="kicker">今日完成</div><div class="big" id="completionValue">0/4</div><div class="small" id="todayXp">今日 0 XP</div></article>
+      </div>
       <div class="stats-grid">
         <article class="stat-panel"><h3>總戰績</h3><div class="achievement"><div class="badge">XP</div><div><b id="totalXpStat">0 XP</b><div class="small">累積經驗值</div></div></div><div class="achievement"><div class="badge">✓</div><div><b id="doneStat">0 關</b><div class="small">完成任務</div></div></div><div class="achievement"><div class="badge">%</div><div><b id="rateStat">0%</b><div class="small">總完成率</div></div></div></article>
         <article class="stat-panel"><h3>成就</h3><div id="achievements"></div></article>
