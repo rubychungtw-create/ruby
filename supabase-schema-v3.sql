@@ -11,6 +11,8 @@ create table if not exists public.focus_timers (
 
 alter table public.focus_timers enable row level security;
 
+grant select, insert, update, delete on table public.focus_timers to authenticated;
+
 drop policy if exists "focus_timers_select_own" on public.focus_timers;
 create policy "focus_timers_select_own" on public.focus_timers for select to authenticated using (auth.uid() = user_id);
 drop policy if exists "focus_timers_insert_own" on public.focus_timers;
