@@ -13,4 +13,6 @@ if (!script.includes("function moveTask") || !script.includes("function openTask
 }
 if (!html.includes('id="questSubmitButton"') || !html.includes('name="editId"')) throw new Error("missing task editor UI");
 if (!html.includes('id="timerDisplay"') || !html.includes('id="timerStartPause"') || !script.includes("function advanceTimer") || !script.includes("function renderTimer")) throw new Error("missing mission timer");
-console.log(JSON.stringify({ htmlBytes: Buffer.byteLength(html), scriptBytes: Buffer.byteLength(script), scriptSyntax: "ok", coreUi: "ok", taskEditing: "ok", dragAndDrop: "ok", missionTimer: "ok" }));
+if (!html.includes('id="timerFullscreen"') || !script.includes("function toggleTimerFocus")) throw new Error("missing fullscreen focus timer");
+if (!html.includes('id="reflectionForm"') || !html.includes('id="notePhotoInput"') || !script.includes("function saveReflection")) throw new Error("missing daily reflection UI");
+console.log(JSON.stringify({ htmlBytes: Buffer.byteLength(html), scriptBytes: Buffer.byteLength(script), scriptSyntax: "ok", coreUi: "ok", taskEditing: "ok", dragAndDrop: "ok", missionTimer: "ok", fullscreenFocus: "ok", dailyReflection: "ok" }));
