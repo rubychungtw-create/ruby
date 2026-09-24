@@ -20,6 +20,7 @@ if (!html.includes('FIRST MIDTERM RAID') || !script.includes('const examSprintPl
 if (!script.includes('const examSprintOrder=') || !script.includes('必讀保底') || !script.includes('熟練加分')) throw new Error("missing interleaved low-motivation pacing");
 if (!script.includes('quest[0]=source[newIndex][0]')) throw new Error("interleaved quests must keep chronological slots");
 if (!html.includes('id="coverageText"') || !html.includes('id="coverageFill"') || !script.includes('const examRequiredIndexes=') || !script.includes('必讀保底')) throw new Error("missing guaranteed scope coverage system");
+if (!html.includes('id="examPlanTableBody"') || !html.includes('id="examPlanSummary"') || !script.includes('function renderExamPlanTable')) throw new Error("missing full exam review table");
 if (script.includes("['2026-09-29','作文'") || script.includes("['2026-09-30','英文聽力'")) throw new Error("first midterm writing/listening review should be excluded");
 for (const subject of ['物理','化學','生物','數學','國文','英文','公民','地理']) if (!script.includes(`'${subject}'`)) throw new Error(`missing subject plan: ${subject}`);
 console.log(JSON.stringify({ htmlBytes: Buffer.byteLength(html), scriptBytes: Buffer.byteLength(script), scriptSyntax: "ok", coreUi: "ok", taskEditing: "ok", dragAndDrop: "ok", missionTimer: "ok", fullscreenFocus: "ok", dailyReflection: "ok", examBosses: "ok", scoreChart: "ok", firstMidtermSprint: "ok" }));
