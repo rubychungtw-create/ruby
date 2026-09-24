@@ -17,8 +17,9 @@ if (!html.includes('id="timerFullscreen"') || !script.includes("function toggleT
 if (!html.includes('id="reflectionForm"') || !html.includes('id="notePhotoInput"') || !script.includes("function saveReflection")) throw new Error("missing daily reflection UI");
 if (!html.includes('id="examPanel"') || !html.includes('id="scoreDialog"') || !html.includes('id="scoreChart"') || !script.includes("function saveExamResult") || !script.includes("function renderScoreChart")) throw new Error("missing exam score progression UI");
 if (!html.includes('FIRST MIDTERM RAID') || !script.includes('const examSprintPlan=') || !script.includes("'2026-10-06'")) throw new Error("missing first midterm sprint plan");
-if (!script.includes('const examSprintOrder=') || !script.includes('今日必打') || !script.includes('加分關')) throw new Error("missing interleaved low-motivation pacing");
+if (!script.includes('const examSprintOrder=') || !script.includes('必讀保底') || !script.includes('熟練加分')) throw new Error("missing interleaved low-motivation pacing");
 if (!script.includes('quest[0]=source[newIndex][0]')) throw new Error("interleaved quests must keep chronological slots");
+if (!html.includes('id="coverageText"') || !html.includes('id="coverageFill"') || !script.includes('const examRequiredIndexes=') || !script.includes('必讀保底')) throw new Error("missing guaranteed scope coverage system");
 if (script.includes("['2026-09-29','作文'") || script.includes("['2026-09-30','英文聽力'")) throw new Error("first midterm writing/listening review should be excluded");
 for (const subject of ['物理','化學','生物','數學','國文','英文','公民','地理']) if (!script.includes(`'${subject}'`)) throw new Error(`missing subject plan: ${subject}`);
 console.log(JSON.stringify({ htmlBytes: Buffer.byteLength(html), scriptBytes: Buffer.byteLength(script), scriptSyntax: "ok", coreUi: "ok", taskEditing: "ok", dragAndDrop: "ok", missionTimer: "ok", fullscreenFocus: "ok", dailyReflection: "ok", examBosses: "ok", scoreChart: "ok", firstMidtermSprint: "ok" }));
