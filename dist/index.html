@@ -95,6 +95,15 @@
       </section>
     </section>
 
+    <section class="panel" id="weekPanel">
+      <div class="week-toolbar">
+        <div><div class="kicker">WEEKLY QUEST MAP</div><h2>我的一週計畫</h2><p>一次看清七天節奏；點日期前往當天，點「＋」直接替那天新增任務。</p></div>
+        <div class="week-controls"><button id="prevWeek" type="button" aria-label="上一週">‹</button><b id="weekRange">本週</b><button id="nextWeek" type="button" aria-label="下一週">›</button><button class="week-today" id="thisWeek" type="button">回本週</button></div>
+      </div>
+      <div class="week-summary" id="weekSummary"></div>
+      <div class="week-calendar" id="weekCalendar" aria-label="一週任務行事曆"></div>
+    </section>
+
     <section class="panel" id="schedulePanel">
       <div class="quest-head"><div><div class="kicker">MISSION MAP</div><h2>未來七天</h2></div></div>
       <div class="schedule-list" id="scheduleList"></div>
@@ -113,17 +122,31 @@
     </section>
 
     <section class="panel" id="statsPanel">
-      <div class="quest-head"><div><div class="kicker">PLAYER RECORD</div><h2>冒險紀錄</h2></div></div>
+      <div class="quest-head"><div><div class="kicker">STUDY PET HOME</div><h2>陪讀寵物小屋</h2><div class="drag-help">完成任務累積 XP；每次升級都能餵食一次，陪牠一起長大。</div></div></div>
       <div class="hud">
-        <article class="hud-card primary"><div class="kicker">目前稱號</div><div class="big" id="titleValue">新手冒險者</div><div class="small"><span id="xpValue">0</span> XP ・距離下一級 <span id="xpNeeded">500</span></div><div class="xp-track"><div class="xp-fill" id="xpFill"></div></div></article>
+        <article class="hud-card primary"><div class="kicker">寵物訓練師</div><div class="big" id="titleValue">新手飼主</div><div class="small"><span id="xpValue">0</span> XP ・距離下一級 <span id="xpNeeded">500</span></div><div class="xp-track"><div class="xp-fill" id="xpFill"></div></div></article>
         <article class="hud-card"><div class="kicker">等級</div><div class="big" id="levelValue">1</div><div class="small">每 500 XP 升級</div></article>
         <article class="hud-card"><div class="kicker">連續通關</div><div class="big"><span id="streakValue">0</span> 天</div><div class="small">全關完成才延續</div></article>
         <article class="hud-card"><div class="kicker">今日完成</div><div class="big" id="completionValue">0/4</div><div class="small" id="todayXp">今日 0 XP</div></article>
       </div>
+      <div class="pet-game-grid">
+        <section class="pet-room" id="petRoom">
+          <div class="pet-room-head"><div><div class="kicker">MY STUDY BUDDY</div><h3 id="petDisplayName">小柴</h3><p id="petStageText">幼年期・剛來到你的書桌</p></div><span class="pet-level" id="petLevelBadge">Lv. 1</span></div>
+          <div class="pet-scene" id="petScene"><div class="pet-furniture" id="petFurniture"></div><img id="petRoomImage" src="assets/study-shiba.png" alt="陪讀柴犬"><div class="pet-status-bubble" id="petStatusBubble">今天也一起完成一小關吧！</div></div>
+          <div class="pet-actions"><button id="feedPet" class="pet-main-action" type="button">🥣 餵食長大</button><span id="feedChances">可餵食 0 次</span></div>
+        </section>
+        <section class="pet-control-card">
+          <div class="pet-balance"><span>可用 XP</span><b id="petWallet">0</b><small>購物不會影響等級</small></div>
+          <h3>角色二選一</h3><p class="pet-choice-note">一次只會啟用一隻，切換後另一隻會回到小屋。</p>
+          <div class="pet-picker"><button type="button" data-pet="shiba"><img src="assets/study-shiba.png" alt="柴犬"><span>柴犬</span></button><button type="button" data-pet="cat"><img src="assets/study-cat.png" alt="貓咪"><span>貓咪</span></button></div>
+          <label class="pet-name-field"><span>幫牠取名字</span><div><input id="petNameInput" maxlength="16" value="小柴"><button id="savePetName" type="button">儲存</button></div></label>
+        </section>
+      </div>
+      <section class="pet-shop-card"><div class="pet-shop-head"><div><div class="kicker">PET SHOP</div><h3>寵物補給商店</h3></div><span>用任務賺到的 XP 解鎖</span></div><div class="pet-shop" id="petShop"></div></section>
       <div class="stats-grid">
         <article class="stat-panel"><h3>總戰績</h3><div class="achievement"><div class="badge">XP</div><div><b id="totalXpStat">0 XP</b><div class="small">累積經驗值</div></div></div><div class="achievement"><div class="badge">✓</div><div><b id="doneStat">0 關</b><div class="small">完成任務</div></div></div><div class="achievement"><div class="badge">%</div><div><b id="rateStat">0%</b><div class="small">總完成率</div></div></div></article>
         <article class="stat-panel"><h3>成就</h3><div id="achievements"></div></article>
-        <article class="stat-panel"><h3>遊戲規則</h3><p>Boss 準備優先於支線。完成一關就勾選；漏做不扣分，隔天只補最高優先的一關。</p><p class="small">週二固定物理影片，週四固定數學影片。每關後休息 5–10 分鐘，時間到就停機。</p></article>
+        <article class="stat-panel"><h3>養成規則</h3><p>每 500 XP 升一級並獲得一次餵食機會。餵食會讓寵物從幼年期成長為好夥伴。</p><p class="small">商店消耗的是可用 XP，不會降低你的等級與累積戰績。</p></article>
       </div>
     </section>
   </main>
@@ -180,7 +203,8 @@
     <div class="login-card"><div class="login-mark">⚡</div><h1>Study Quest</h1><p>登入自己的冒險存檔。你的任務、XP、標題與主題會在不同裝置保持同步。</p><button class="google-btn" id="googleSignIn" type="button"><span class="google-icon">G</span> 使用 Google 帳號登入</button><div class="auth-error" id="authError"></div><div class="privacy-note">每位玩家只能查看與修改自己的資料。<br><a href="privacy.html">隱私權政策</a>・<a href="terms.html">服務條款</a></div></div>
   </section>
   <div class="loading-mask hidden" id="loadingMask"><div><div class="spinner"></div>正在載入你的冒險存檔…</div></div>
-  <nav class="bottom-nav" aria-label="主要頁面"><button class="nav-btn active" data-panel="focusPanel">專注</button><button class="nav-btn" data-panel="todayPanel">任務</button><button class="nav-btn" data-panel="examPanel">週考</button><button class="nav-btn" data-panel="reviewPanel">回想</button><button class="nav-btn" data-panel="schedulePanel">行程</button><button class="nav-btn" data-panel="statsPanel">戰績</button></nav>
+  <button class="pet-companion" id="petCompanion" type="button" aria-label="打開陪讀寵物小屋"><span class="companion-bubble" id="companionBubble">一起讀一小關！</span><img id="companionImage" src="assets/study-shiba.png" alt="陪讀柴犬"></button>
+  <nav class="bottom-nav" aria-label="主要頁面"><button class="nav-btn active" data-panel="focusPanel">專注</button><button class="nav-btn" data-panel="todayPanel">任務</button><button class="nav-btn" data-panel="weekPanel">週曆</button><button class="nav-btn" data-panel="examPanel">週考</button><button class="nav-btn" data-panel="reviewPanel">回想</button><button class="nav-btn" data-panel="schedulePanel">行程</button><button class="nav-btn" data-panel="statsPanel">寵物</button></nav>
   <div class="celebrate" id="celebrate"></div><div class="toast" id="toast" role="status"></div>
   <script type="text/plain" id="legacyScript">
     const DAY=86400000, start=new Date('2026-09-12T00:00:00'), end=new Date('2027-01-20T00:00:00');
