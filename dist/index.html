@@ -29,6 +29,7 @@
   </style>
   <link rel="stylesheet" href="cloud.css" />
   <link rel="stylesheet" href="forest.css" />
+  <link rel="stylesheet" href="homework.css" />
 </head>
 <body data-theme="pink">
   <main class="app">
@@ -105,6 +106,17 @@
       <div class="week-calendar" id="weekCalendar" aria-label="一週任務行事曆"></div>
     </section>
 
+    <section class="panel" id="homeworkPanel">
+      <div class="homework-hero">
+        <div><div class="kicker">CLASS QUEST SYNC</div><h2>高二愛班功課</h2><p>每天自動同步再興中學電子聯絡簿；星期六、日會繼續顯示星期五的任務。</p></div>
+        <div class="homework-actions"><span id="homeworkSyncState">等待同步</span><button id="refreshHomework" type="button">↻ 重新同步</button></div>
+      </div>
+      <div class="weekend-carry hidden" id="homeworkWeekendCarry">🏕️ 週末續關：沿用星期五功課，做完再打勾。</div>
+      <div class="homework-meta"><b id="homeworkDateLabel">讀取中…</b><span id="homeworkLastUpdated"></span><a href="https://www.thsh.tp.edu.tw/nss/s/thsh/111?g=c0dgl5fea8&&c=36owskn1cv" target="_blank" rel="noopener noreferrer">查看學校原始聯絡簿 ↗</a></div>
+      <div class="homework-board" id="homeworkBoard"><div class="homework-loading">正在向班級聯絡簿確認今天的任務…</div></div>
+      <div class="homework-note">勾選紀錄會依登入帳號保存在這台裝置；學校網頁有新內容時，重新同步就會加入。</div>
+    </section>
+
     <section class="panel" id="schedulePanel">
       <div class="quest-head"><div><div class="kicker">MISSION MAP</div><h2>未來七天</h2></div></div>
       <div class="schedule-list" id="scheduleList"></div>
@@ -123,7 +135,7 @@
     </section>
 
     <section class="panel" id="statsPanel">
-      <div class="quest-head forest-head"><div><div class="kicker">FOCUS FOREST</div><h2>我的專注森林</h2><div class="drag-help">完成一輪 45 分鐘專注，就會依照本輪科目種下一棵樹。</div></div><div class="forest-filters" aria-label="森林顯示範圍"><button class="active" type="button" data-forest-filter="week">本週</button><button type="button" data-forest-filter="today">今天</button><button type="button" data-forest-filter="all">全部</button></div></div>
+      <div class="quest-head forest-head"><div><div class="kicker">FOCUS FOREST</div><h2>我的專注森林 <span class="season-badge" id="forestSeasonBadge">換季中</span></h2><div class="drag-help">完成一輪 45 分鐘專注，就會依照本輪科目種下一棵樹；森林會隨月份換季。</div></div><div class="forest-filters" aria-label="森林顯示範圍"><button class="active" type="button" data-forest-filter="week">本週</button><button type="button" data-forest-filter="today">今天</button><button type="button" data-forest-filter="all">全部</button></div></div>
       <div class="hud">
         <article class="hud-card primary"><div class="kicker">森林等級</div><div class="big" id="titleValue">新芽守護者</div><div class="small"><span id="xpValue">0</span> XP ・距離下一級 <span id="xpNeeded">500</span></div><div class="xp-track"><div class="xp-fill" id="xpFill"></div></div></article>
         <article class="hud-card"><div class="kicker">等級</div><div class="big" id="levelValue">1</div><div class="small">每 500 XP 升級</div></article>
@@ -133,7 +145,7 @@
       <div class="forest-grid">
         <section class="forest-card">
           <div class="forest-card-head"><div><div class="kicker">YOUR FOCUS, GROWING</div><h3 id="forestRangeTitle">本週森林</h3></div><span id="forestTreeCount">0 棵樹</span></div>
-          <div class="forest-scene" id="forestScene" aria-label="專注森林"><div class="forest-sky"><span></span><span></span><span></span></div><div class="forest-plants" id="forestPlants"></div><div class="forest-empty" id="forestEmpty"><b>🌱 第一顆種子正在等你</b><span>選好本輪目標，完成 45 分鐘就能種下。</span></div></div>
+          <div class="forest-scene" id="forestScene" aria-label="專注森林"><div class="forest-sky"><span></span><span></span><span></span></div><div class="season-particles" id="seasonParticles" aria-hidden="true"></div><div class="forest-plants" id="forestPlants"></div><div class="forest-empty" id="forestEmpty"><b>🌱 第一顆種子正在等你</b><span>選好本輪目標，完成 45 分鐘就能種下。</span></div></div>
           <div class="forest-legend"><span><i class="tree-dot math"></i>數學</span><span><i class="tree-dot physics"></i>物理</span><span><i class="tree-dot chemistry"></i>化學</span><span><i class="tree-dot biology"></i>生物</span><span><i class="tree-dot other"></i>其他</span></div>
         </section>
         <section class="forest-summary-card">
@@ -205,7 +217,7 @@
   </section>
   <div class="loading-mask hidden" id="loadingMask"><div><div class="spinner"></div>正在載入你的冒險存檔…</div></div>
   <div class="pet-legacy-hidden" hidden><button id="petCompanion" type="button"><span id="companionBubble"></span><img id="companionImage" alt=""></button><span id="petDisplayName"></span><span id="petStageText"></span><span id="petLevelBadge"></span><span id="petWallet"></span><input id="petNameInput"><span id="feedChances"></span><button id="feedPet" type="button"></button><button id="petPlayAction" type="button"></button><button id="savePetName" type="button"></button><button data-pet="shiba" type="button"></button><button data-pet="cat" type="button"></button><div id="petScene"><img id="petRoomImage" alt=""></div><div id="petFurniture"></div><div id="petStatusBubble"></div><div id="petShop"></div></div>
-  <nav class="bottom-nav" aria-label="主要頁面"><button class="nav-btn active" data-panel="focusPanel">專注</button><button class="nav-btn" data-panel="todayPanel">任務</button><button class="nav-btn" data-panel="weekPanel">週曆</button><button class="nav-btn" data-panel="examPanel">週考</button><button class="nav-btn" data-panel="reviewPanel">回想</button><button class="nav-btn" data-panel="schedulePanel">行程</button><button class="nav-btn" data-panel="statsPanel">森林</button></nav>
+  <nav class="bottom-nav" aria-label="主要頁面"><button class="nav-btn active" data-panel="focusPanel">專注</button><button class="nav-btn" data-panel="todayPanel">任務</button><button class="nav-btn" data-panel="homeworkPanel">功課</button><button class="nav-btn" data-panel="weekPanel">週曆</button><button class="nav-btn" data-panel="examPanel">週考</button><button class="nav-btn" data-panel="reviewPanel">回想</button><button class="nav-btn" data-panel="schedulePanel">行程</button><button class="nav-btn" data-panel="statsPanel">森林</button></nav>
   <div class="celebrate" id="celebrate"></div><div class="toast" id="toast" role="status"></div>
   <script type="text/plain" id="legacyScript">
     const DAY=86400000, start=new Date('2026-09-12T00:00:00'), end=new Date('2027-01-20T00:00:00');
@@ -244,3 +256,4 @@
   <script src="app.js"></script>
 </body>
 </html>
+
