@@ -22,11 +22,8 @@ if (!script.includes('quest[0]=source[newIndex][0]')) throw new Error("interleav
 if (!html.includes('id="coverageText"') || !html.includes('id="coverageFill"') || !script.includes('const examRequiredIndexes=') || !script.includes('必讀保底')) throw new Error("missing guaranteed scope coverage system");
 if (!html.includes('id="examPlanTableBody"') || !html.includes('id="examPlanSummary"') || !script.includes('function renderExamPlanTable')) throw new Error("missing full exam review table");
 if (!html.includes('id="weekPanel"') || !html.includes('id="weekCalendar"') || !script.includes('function renderWeek') || !script.includes('data-week-add')) throw new Error("missing weekly calendar task flow");
-if (!html.includes('id="petCompanion"') || !html.includes('id="petShop"') || !script.includes('function renderPet') || !script.includes('function feedPet') || !script.includes('function buyPetItem')) throw new Error("missing study pet game");
-if (!html.includes('id="petPlayAction"') || !script.includes('function playPetMotion') || !script.includes('function schedulePetMotion')) throw new Error("missing animated pet actions");
-if (!html.includes('角色二選一') || !script.includes("button.setAttribute('aria-pressed'") || !script.includes('function rawMissionsFor') || !script.includes("type:'昨日續關'") || !script.includes("q.quadrant==='urgent_important'")) throw new Error("missing single active pet or urgent carryover flow");
-for (const asset of ['dist/assets/study-shiba.png','dist/assets/study-cat.png']) if (!fs.existsSync(asset) || fs.statSync(asset).size < 10000) throw new Error(`missing pet asset: ${asset}`);
+if (!html.includes('FOCUS FOREST') || !html.includes('id="forestPlants"') || !html.includes('data-forest-filter="week"') || !script.includes('function plantFocusTree') || !script.includes("db.from('focus_forest')")) throw new Error("missing focus forest flow");
+if (!script.includes('function rawMissionsFor') || !script.includes("type:'昨日續關'") || !script.includes("q.quadrant==='urgent_important'")) throw new Error("missing urgent carryover flow");
 if (script.includes("['2026-09-29','作文'") || script.includes("['2026-09-30','英文聽力'")) throw new Error("first midterm writing/listening review should be excluded");
 for (const subject of ['物理','化學','生物','數學','國文','英文','公民','地理']) if (!script.includes(`'${subject}'`)) throw new Error(`missing subject plan: ${subject}`);
 console.log(JSON.stringify({ htmlBytes: Buffer.byteLength(html), scriptBytes: Buffer.byteLength(script), scriptSyntax: "ok", coreUi: "ok", taskEditing: "ok", dragAndDrop: "ok", missionTimer: "ok", fullscreenFocus: "ok", dailyReflection: "ok", examBosses: "ok", scoreChart: "ok", firstMidtermSprint: "ok" }));
-
