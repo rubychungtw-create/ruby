@@ -3,6 +3,7 @@ const html = fs.readFileSync("dist/index.html", "utf8");
 const script = fs.readFileSync("dist/app.js", "utf8");
 const privacy = fs.readFileSync("dist/privacy.html", "utf8");
 const terms = fs.readFileSync("dist/terms.html", "utf8");
+const worker = fs.readFileSync("worker/index.mjs", "utf8");
 new Function(script);
 if (!html.includes('id="questMatrix"') || !html.includes('id="googleSignIn"') || !html.includes('id="settingsDialog"')) {
   throw new Error("missing core UI");
@@ -23,7 +24,10 @@ if (!html.includes('id="coverageText"') || !html.includes('id="coverageFill"') |
 if (!html.includes('id="examPlanTableBody"') || !html.includes('id="examPlanSummary"') || !script.includes('function renderExamPlanTable')) throw new Error("missing full exam review table");
 if (!html.includes('id="weekPanel"') || !html.includes('id="weekCalendar"') || !script.includes('function renderWeek') || !script.includes('data-week-add')) throw new Error("missing weekly calendar task flow");
 if (!html.includes('FOCUS FOREST') || !html.includes('id="forestPlants"') || !html.includes('data-forest-filter="week"') || !script.includes('function plantFocusTree') || !script.includes("db.from('focus_forest')")) throw new Error("missing focus forest flow");
+if (!html.includes('id="homeworkPanel"') || !html.includes('id="homeworkBoard"') || !script.includes('function loadHomework') || !worker.includes("url.pathname==='/api/homework'")) throw new Error("missing school homework sync");
+if (!html.includes('id="forestSeasonBadge"') || !script.includes('function forestSeasonFor') || !script.includes("key:'christmas'")) throw new Error("missing seasonal focus forest");
 if (!script.includes('function rawMissionsFor') || !script.includes("type:'昨日續關'") || !script.includes("q.quadrant==='urgent_important'")) throw new Error("missing urgent carryover flow");
 if (script.includes("['2026-09-29','作文'") || script.includes("['2026-09-30','英文聽力'")) throw new Error("first midterm writing/listening review should be excluded");
 for (const subject of ['物理','化學','生物','數學','國文','英文','公民','地理']) if (!script.includes(`'${subject}'`)) throw new Error(`missing subject plan: ${subject}`);
 console.log(JSON.stringify({ htmlBytes: Buffer.byteLength(html), scriptBytes: Buffer.byteLength(script), scriptSyntax: "ok", coreUi: "ok", taskEditing: "ok", dragAndDrop: "ok", missionTimer: "ok", fullscreenFocus: "ok", dailyReflection: "ok", examBosses: "ok", scoreChart: "ok", firstMidtermSprint: "ok" }));
+
