@@ -72,6 +72,12 @@
         <div class="timer-control-area">
           <div class="timer-rounds" id="timerRounds" aria-label="四輪專注進度"></div>
           <div class="timer-actions"><button class="timer-main-btn" id="timerStartPause" type="button">▶ 開始任務</button><button class="timer-reset-btn" id="timerReset" type="button">↻ 重設</button><button class="timer-expand-btn" id="timerFullscreen" type="button" aria-pressed="false">⛶ 放大專注</button></div>
+          <div class="focus-sound" aria-labelledby="focusSoundTitle">
+            <div class="focus-sound-head"><b id="focusSoundTitle">🎧 專注音景</b><span id="focusSoundStatus">雨聲・計時開始時播放</span></div>
+            <div class="focus-sound-options" role="group" aria-label="選擇專注音景"><button type="button" data-focus-sound="off">關閉</button><button type="button" data-focus-sound="rain">🌧 雨聲</button><button type="button" data-focus-sound="mozart">♫ 莫札特</button></div>
+            <label class="focus-volume" for="focusSoundVolume"><span>音量</span><input id="focusSoundVolume" type="range" min="0" max="100" step="1" value="35"><output id="focusSoundVolumeValue" for="focusSoundVolume">35%</output></label>
+            <small>音樂由網站即時合成，不使用外部錄音；休息與暫停時會自動停止。</small>
+          </div>
           <div class="timer-save-note">登入後自動儲存・換裝置也能接著倒數</div>
         </div>
       </section>
