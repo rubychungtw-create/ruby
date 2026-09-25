@@ -29,6 +29,7 @@ if (!html.includes('id="forestSeasonBadge"') || !script.includes('function fores
 if (!script.includes('function recoveryQueueFor') || !script.includes("type:'自動補救'") || !script.includes('全部接續')) throw new Error("missing full automatic recovery flow");
 if (!script.includes('function importHomeworkTask') || !html.includes('id="recoveryPlan"')) throw new Error("missing homework import and recovery UI");
 if (!html.includes('id="focusSoundVolume"') || !script.includes('function startRainSound') || !script.includes('function startMozartSound') || !script.includes('function syncFocusSound')) throw new Error("missing focus sound controls");
+if (!script.includes('function homeworkCarryoverDate') || !script.includes('study-quest-homework-cache-v2') || !script.includes('homework-carry-tag')) throw new Error("missing 9/24 homework carryover");
 if (!script.includes("db.from('homework_progress')") || !script.includes("db.from('review_revives')") || !html.includes('id="revivalSchedule"')) throw new Error("missing cloud homework and mistake revival flow");
 if (script.includes("['2026-09-29','作文'") || script.includes("['2026-09-30','英文聽力'")) throw new Error("first midterm writing/listening review should be excluded");
 for (const subject of ['物理','化學','生物','數學','國文','英文','公民','地理']) if (!script.includes(`'${subject}'`)) throw new Error(`missing subject plan: ${subject}`);
