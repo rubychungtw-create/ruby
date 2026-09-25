@@ -26,7 +26,7 @@ if (!html.includes('id="weekPanel"') || !html.includes('id="weekCalendar"') || !
 if (!html.includes('FOCUS FOREST') || !html.includes('id="forestPlants"') || !html.includes('data-forest-filter="week"') || !script.includes('function plantFocusTree') || !script.includes("db.from('focus_forest')")) throw new Error("missing focus forest flow");
 if (!html.includes('id="homeworkPanel"') || !html.includes('id="homeworkBoard"') || !script.includes('function loadHomework') || !worker.includes("url.pathname==='/api/homework'")) throw new Error("missing school homework sync");
 if (!html.includes('id="forestSeasonBadge"') || !script.includes('function forestSeasonFor') || !script.includes("key:'christmas'")) throw new Error("missing seasonal focus forest");
-if (!script.includes('function recoveryQueueFor') || !script.includes("type:'自動補救'") || !script.includes("slice(0,3)")) throw new Error("missing bounded automatic recovery flow");
+if (!script.includes('function recoveryQueueFor') || !script.includes("type:'自動補救'") || !script.includes('全部接續')) throw new Error("missing full automatic recovery flow");
 if (!script.includes('function importHomeworkTask') || !html.includes('id="recoveryPlan"')) throw new Error("missing homework import and recovery UI");
 if (!script.includes("db.from('homework_progress')") || !script.includes("db.from('review_revives')") || !html.includes('id="revivalSchedule"')) throw new Error("missing cloud homework and mistake revival flow");
 if (script.includes("['2026-09-29','作文'") || script.includes("['2026-09-30','英文聽力'")) throw new Error("first midterm writing/listening review should be excluded");
