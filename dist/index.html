@@ -79,6 +79,7 @@
 
     <section class="panel" id="todayPanel">
       <div class="sprint-banner"><div><span class="sprint-kicker">FIRST MIDTERM RAID</span><b>第一次段考衝刺｜9/24～10/6</b><small>完成「必讀保底」＝範圍 100%｜10/2 讀完，10/3～10/4 只做總複習</small></div><div class="sprint-status"><span class="sprint-badge">照表完成＝讀完一輪</span><div class="coverage-text" id="coverageText">必讀覆蓋 0/0｜0%</div><div class="coverage-track"><i id="coverageFill"></i></div></div></div>
+      <section class="recovery-plan" id="recoveryPlan" aria-live="polite"></section>
       <div class="quest-head"><div><div class="kicker">TODAY'S QUESTS</div><h2 id="questTitle">今日關卡</h2><div class="drag-help">拖曳任務卡到其他區域，即可更改分類</div></div><div class="quest-actions"><div class="daily-progress" id="dailyProgress">0%</div><button class="add-quest-btn" id="openQuestDialog" type="button">＋ 新增關卡</button></div></div>
       <div class="matrix" id="questMatrix"></div>
     </section>
@@ -92,8 +93,9 @@
           <label class="review-field"><span>心得／還沒弄懂的地方</span><textarea id="reflectionText" name="reflection" maxlength="1500" rows="6" placeholder="哪一步最卡？下次要怎麼驗證自己真的會了？"></textarea></label>
           <div class="note-upload full"><div><b>拍下或上傳筆記</b><div class="small">支援 JPG、PNG、WebP，最多 8 MB</div></div><label class="upload-btn" for="notePhotoInput">📷 選擇照片</label><input id="notePhotoInput" type="file" accept="image/jpeg,image/png,image/webp" capture="environment"><span id="notePhotoName" class="photo-name">尚未選擇照片</span></div>
           <div class="note-preview-wrap full" id="notePreviewWrap"><img id="notePhotoPreview" alt="筆記照片預覽"><div class="photo-placeholder" id="photoPlaceholder">上傳後會在這裡看到筆記照片</div></div>
-          <div class="review-actions full"><span id="reviewSaveState">內容會儲存在你的帳號</span><button class="save-review-btn" id="saveReflection" type="submit">✦ 儲存今日回想</button></div>
+          <div class="review-actions full"><span id="reviewSaveState">內容會儲存在你的帳號</span><div class="review-button-row"><button class="revive-review-btn" id="reviveReflectionTask" type="button">↻ 排入錯題復活</button><button class="save-review-btn" id="saveReflection" type="submit">✦ 儲存今日回想</button></div></div>
         </form>
+        <section class="revival-schedule"><div class="revival-head"><div><div class="kicker">REVIVAL QUEUE</div><h3>錯題復活行程</h3></div><span id="revivalCount">0 關待複習</span></div><div id="revivalSchedule"></div></section>
       </section>
     </section>
 
@@ -114,7 +116,7 @@
       <div class="weekend-carry hidden" id="homeworkWeekendCarry">🏕️ 週末續關：沿用星期五功課，做完再打勾。</div>
       <div class="homework-meta"><b id="homeworkDateLabel">讀取中…</b><span id="homeworkLastUpdated"></span><a href="https://www.thsh.tp.edu.tw/nss/s/thsh/111?g=c0dgl5fea8&&c=36owskn1cv" target="_blank" rel="noopener noreferrer">查看學校原始聯絡簿 ↗</a></div>
       <div class="homework-board" id="homeworkBoard"><div class="homework-loading">正在向班級聯絡簿確認今天的任務…</div></div>
-      <div class="homework-note">勾選紀錄會依登入帳號保存在這台裝置；學校網頁有新內容時，重新同步就會加入。</div>
+      <div class="homework-note">完成狀態與加入任務紀錄會跟著登入帳號雲端同步；學校網頁有新內容時，重新同步就會加入。</div>
     </section>
 
     <section class="panel" id="schedulePanel">
