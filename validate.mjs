@@ -23,6 +23,7 @@ if (!html.includes('id="coverageText"') || !html.includes('id="coverageFill"') |
 if (!html.includes('id="examPlanTableBody"') || !html.includes('id="examPlanSummary"') || !script.includes('function renderExamPlanTable')) throw new Error("missing full exam review table");
 if (!html.includes('id="weekPanel"') || !html.includes('id="weekCalendar"') || !script.includes('function renderWeek') || !script.includes('data-week-add')) throw new Error("missing weekly calendar task flow");
 if (!html.includes('id="petCompanion"') || !html.includes('id="petShop"') || !script.includes('function renderPet') || !script.includes('function feedPet') || !script.includes('function buyPetItem')) throw new Error("missing study pet game");
+if (!html.includes('id="petPlayAction"') || !script.includes('function playPetMotion') || !script.includes('function schedulePetMotion')) throw new Error("missing animated pet actions");
 if (!html.includes('角色二選一') || !script.includes("button.setAttribute('aria-pressed'") || !script.includes('function rawMissionsFor') || !script.includes("type:'昨日續關'") || !script.includes("q.quadrant==='urgent_important'")) throw new Error("missing single active pet or urgent carryover flow");
 for (const asset of ['dist/assets/study-shiba.png','dist/assets/study-cat.png']) if (!fs.existsSync(asset) || fs.statSync(asset).size < 10000) throw new Error(`missing pet asset: ${asset}`);
 if (script.includes("['2026-09-29','作文'") || script.includes("['2026-09-30','英文聽力'")) throw new Error("first midterm writing/listening review should be excluded");
