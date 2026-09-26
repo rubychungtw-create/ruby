@@ -143,7 +143,7 @@
     </section>
 
     <section class="panel" id="statsPanel">
-      <div class="quest-head forest-head"><div><div class="kicker">FOCUS FOREST</div><h2>我的專注森林 <span class="season-badge" id="forestSeasonBadge">換季中</span></h2><div class="drag-help">完成一輪 45 分鐘專注，就會依照本輪科目種下一棵樹；森林會隨月份換季。</div></div><div class="forest-filters" aria-label="森林顯示範圍"><button class="active" type="button" data-forest-filter="week">本週</button><button type="button" data-forest-filter="today">今天</button><button type="button" data-forest-filter="all">全部</button></div></div>
+      <div class="quest-head forest-head"><div><div class="kicker">FOCUS FOREST</div><h2>我的專注森林 <span class="season-badge" id="forestSeasonBadge">換季中</span></h2><div class="drag-help">完成一輪 45 分鐘專注就種下一棵樹；同一週持續累積，每週一開始一座新森林。</div><div class="forest-week-note" id="forestRefreshNote">每週一 00:00 刷新，本週的樹會越長越茂密。</div></div><div class="forest-filters" aria-label="森林顯示範圍"><button class="active" type="button" data-forest-filter="week">本週森林</button><button type="button" data-forest-filter="all">全部紀錄</button></div></div>
       <div class="hud">
         <article class="hud-card primary"><div class="kicker">森林等級</div><div class="big" id="titleValue">新芽守護者</div><div class="small"><span id="xpValue">0</span> XP ・距離下一級 <span id="xpNeeded">500</span></div><div class="xp-track"><div class="xp-fill" id="xpFill"></div></div></article>
         <article class="hud-card"><div class="kicker">等級</div><div class="big" id="levelValue">1</div><div class="small">每 500 XP 升級</div></article>
@@ -160,14 +160,14 @@
           <div class="forest-metric"><span>累積種植</span><b id="forestTotalTrees">0</b><small>棵專注樹</small></div>
           <div class="forest-metric"><span>專注時間</span><b id="forestTotalMinutes">0</b><small>分鐘</small></div>
           <div class="forest-metric"><span>本週成長</span><b id="forestWeekTrees">0</b><small>棵新樹</small></div>
-          <div class="forest-tip"><b>種樹規則</b><p>完成整輪 45 分鐘才會種下；中途暫停不會讓樹枯掉，回來繼續即可。</p></div>
+          <div class="forest-tip"><b>每週造林規則</b><p>完成整輪 45 分鐘才會種下；本週持續累積，下週一畫面換成新森林，過去成果仍保留在「全部紀錄」。</p></div>
         </section>
       </div>
       <section class="forest-log-card"><div class="forest-card-head"><div><div class="kicker">GROWTH LOG</div><h3>最近種下的樹</h3></div><span>每棵都是一次完成的專注</span></div><div class="forest-log" id="forestLog"></div></section>
       <div class="stats-grid">
         <article class="stat-panel"><h3>總戰績</h3><div class="achievement"><div class="badge">XP</div><div><b id="totalXpStat">0 XP</b><div class="small">累積經驗值</div></div></div><div class="achievement"><div class="badge">✓</div><div><b id="doneStat">0 關</b><div class="small">完成任務</div></div></div><div class="achievement"><div class="badge">%</div><div><b id="rateStat">0%</b><div class="small">總完成率</div></div></div></article>
         <article class="stat-panel"><h3>成就</h3><div id="achievements"></div></article>
-        <article class="stat-panel"><h3>森林規則</h3><p>數學、物理、化學、生物會長出不同種類的樹，其他科目則會開出專注花木。</p><p class="small">森林只計算完整完成的 45 分鐘，不會因為暫停或休息而消失。</p></article>
+        <article class="stat-panel"><h3>森林規則</h3><p>數學、物理、化學、生物會長出不同種類的樹，其他科目則會開出專注花木。</p><p class="small">森林每週一換新一輪，只計算完整完成的 45 分鐘；歷史成果不會被刪除。</p></article>
       </div>
     </section>
   </main>
